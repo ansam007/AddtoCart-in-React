@@ -1,6 +1,7 @@
 import FormPage from "./Form/FormPage";
 import React, { useState, useEffect } from "react";
 import ProductDetails from "./Form/ProductDetails";
+import ExpenseDetail from "./Form/ExpenseDetail";
 
 function App() {
   const [userData, setUserData] = useState([]);
@@ -27,6 +28,7 @@ function App() {
     <div>
       <FormPage addItems={addItemsHandler}></FormPage>
       <ProductDetails items={userData} onDelete={handleDelete}></ProductDetails>
+      <ExpenseDetail item={userData}></ExpenseDetail>
     </div>
   );
 }
