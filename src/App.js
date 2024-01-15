@@ -1,31 +1,34 @@
 import FormPage from "./Form/FormPage";
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
+import ProductDetails from "./Form/ProductDetails";
 
 function App() {
   const [userData, setUserData] = useState([]);
 
+  useEffect(() => {
+    const storedData = Object.keys(localStorage).map((key) => {
+      return JSON.parse(localStorage.getItem(key));
+    });
+
+    setUserData(storedData);
+  }, []);
+
   function addItemsHandler(data) {
-    setUserData((prevData) => [
-      ...prevData,
-      data
-    ]);
-    console.log(data);
+    const retrievedData = JSON.parse(data);
+
+    setUserData((prevData) => [...prevData, retrievedData]);
   }
-  
+
+  const handleDelete = (updatedItems) => {
+    setUserData(updatedItems);
+  }
 
   return (
     <div>
       <FormPage addItems={addItemsHandler}></FormPage>
-      {userData.map((item, index) => (
-        <div key={index}>
-          <p>{item.ProductID}</p>
-          <p>{item.SellingPrice}</p>
-          <p>{item.ProductName}</p>
-        </div>
-      ))}
+      <ProductDetails items={userData} onDelete={handleDelete}></ProductDetails>
     </div>
   );
-  
 }
 
 export default App;

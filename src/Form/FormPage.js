@@ -27,9 +27,9 @@ const FormPage = (props) => {
         }
 
         const jsonString = JSON.stringify(data);
-        
+
         localStorage.setItem(data.ProductID, jsonString);
-        props.addItems(data);
+        props.addItems(jsonString);
 
         setCurrentID('');
         setsellingCost('');
